@@ -3,7 +3,6 @@ let usuarios = [];
 let usuarioTemp = null;
 
 
-
 /**
 * metodo para traer todos los usuarios y enlistarlos
 */
@@ -11,7 +10,8 @@ function obtenerUsuarios() {
 
 
 
-    axios.get("http://localhost:3002/apiFinal/v1/usuarios").then((response) => {
+    let token = localStorage.getItem("token")
+    axios.get("http://localhost:3002/apiFinal/v1/usuarios", { headers: { "token": token } }).then((response) => {
 
         let lista = document.getElementById("listaUsuarios")
         usuarios = response.data;
@@ -57,13 +57,14 @@ function obtenerUsuarios() {
 function crearUsuario() {
 
     let usuario = obtenerValores()
+    let token = localStorage.getItem("token")
 
     axios
-        .post("http://localhost:3002/apiFinal/v1/usuarios", usuario)
+        .post("http://localhost:3002/apiFinal/v1/usuarios", usuario, { headers: { "token": token } })
         .then((response) => {
             obtenerUsuarios()
             limpiarForm()
-            console.log(response);
+            alert(response.data.mensaje);
         })
         .catch((error) => {
             console.log(error);
@@ -91,6 +92,23 @@ function obtenerValores() {
 
 }
 
+
+
+function obtenerValoresSinclave(){
+    let tipo_documento = document.getElementById("tipo_documento").value
+    let documento = document.getElementById("documento").value
+    let nombre = document.getElementById("nombre").value
+    let apellidos = document.getElementById("apellidos").value
+    let celular = document.getElementById("celular").value
+    let correo = document.getElementById("correo").value
+    let rol = document.getElementById("rol").value
+
+
+    let miUsuario = { tipo_documento, documento, nombre, apellidos, celular, correo, rol}
+    return miUsuario
+
+}
+
 function limpiarForm() {
 
 
@@ -107,11 +125,12 @@ function limpiarForm() {
 
 
     document.getElementById("labelDocumento").style.display = "inline"
-            document.getElementById("documento").style.display = "inline"
-            document.getElementById("btnCrearUsuario").style.display = "inline"
-            document.getElementById("titulo1").style.display = "inline"
-            document.getElementById("btnEditarUsuario").style.display = "none"
-            document.getElementById("titulo2").style.display = "none"
+    document.getElementById("documento").style.display = "inline"
+    document.getElementById("btnCrearUsuario").style.display = "inline"
+    document.getElementById("titulo1").style.display = "inline"
+    document.getElementById("btnEditarUsuario").style.display = "none"
+    document.getElementById("titulo2").style.display = "none"
+    document.getElementById("espacioClave").style.display="inline"
 
 
 }
@@ -122,8 +141,9 @@ function limpiarForm() {
  * @param {*} documento del usuario en la base de datos
  */
 function eliminarUsuario(documento) {
+    let token = localStorage.getItem("token")
 
-    axios.delete(`http://localhost:3002/apiFinal/v1/usuarios/${documento}`)
+    axios.delete(`http://localhost:3002/apiFinal/v1/usuarios/${documento}`, { headers: { "token": token } })
         .then((response) => {
             obtenerUsuarios()
             console.log(response);
@@ -150,13 +170,13 @@ function cargarInformacion(documento) {
             document.getElementById("celular").value = usuario.celular
             document.getElementById("correo").value = usuario.correo
             document.getElementById("rol").value = usuario.rol
-            document.getElementById("clave").value = usuario.clave
             document.getElementById("labelDocumento").style.display = "none"
             document.getElementById("documento").style.display = "none"
             document.getElementById("btnCrearUsuario").style.display = "none"
             document.getElementById("titulo1").style.display = "none"
             document.getElementById("btnEditarUsuario").style.display = "inline"
             document.getElementById("titulo2").style.display = "inline"
+            document.getElementById("espacioClave").style.display="none"
             return
         }
 
@@ -169,12 +189,13 @@ function cargarInformacion(documento) {
  */
 function actualizarUsuario() {
 
-    let usuario = obtenerValores();
+    let usuario = obtenerValoresSinclave();
 
     console.log(usuarioTemp)
+    let token = localStorage.getItem("token")
 
     axios
-        .put(`http://localhost:3002/apiFinal/v1/usuarios/${usuarioTemp}`, usuario)
+        .put(`http://localhost:3002/apiFinal/v1/usuarios/${usuarioTemp}`, usuario, { headers: { "token": token } })
         .then((response) => {
             obtenerUsuarios()
             limpiarForm()
@@ -183,7 +204,9 @@ function actualizarUsuario() {
         .catch((error) => {
             console.log(error);
         });
+        
 
+        location.href = "../pages/usuarios.html";
 }
 
 

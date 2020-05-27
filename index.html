@@ -12,6 +12,34 @@
 </head>
 
 <body>
+
+
+    <div class="mi_contenedor">
+        <div class="card-body">
+           <center><h1 class="card-subtitle mb-2 text-muted" id="titulo1">Login</h1></center> 
+            
+            <form action="javascript:void(0)" onsubmit="iniciarSesion()">
+                <div class="form-group required">
+                    <label for="correo" id="labelPlaca">Correo</label>
+                    <input class="form-control" type="text" placeholder="Ingrese el correo del usuario" id="correo"
+                        required>
+                </div>
+                <div class="form-group required">
+                    <label for="clave">Clave</label>
+                    <input class="form-control" type="password" placeholder="Ingrese el estado de la moto" id="clave"
+                        required>
+                </div>
+
+                <center><input id="btnCrearMoto" class="btn btn-primary" type="submit" value="Iniciar Sesion"></center>
+                
+            </form>
+        </div>
+    </div>
+
+
+
+
+
     
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -24,7 +52,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/index.js"></script>
+    <script src="/js/login.js"></script>
 
 </body>
 

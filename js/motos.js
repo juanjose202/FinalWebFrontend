@@ -9,9 +9,15 @@ let motoTemp = null;
 */
 function obtenerMotos() {
 
+   
+       let token= localStorage.getItem("token")
+    
 
 
-    axios.get("http://localhost:3002/apiFinal/v1/motos").then((response) => {
+    axios.get("http://localhost:3002/apiFinal/v1/motos",{headers:{"token":token}}).then((response) => {
+
+
+
 
         let lista = document.getElementById("listaMotos")
         motos = response.data;
@@ -36,6 +42,7 @@ function obtenerMotos() {
     })
         .catch((error) => {
             console.log(error);
+            alert("ERROR es posible que no estes autorizado para realizar esta accion")
         });
 
 
@@ -48,16 +55,19 @@ function obtenerMotos() {
 function crearMoto() {
 
     let moto = obtenerValores()
+    let token = localStorage.getItem("token")
 
     axios
-        .post("http://localhost:3002/apiFinal/v1/motos", moto)
+        .post("http://localhost:3002/apiFinal/v1/motos", moto,{headers:{"token":token}})
         .then((response) => {
             obtenerMotos()
             limpiarForm()
-            console.log(response);
+            alert(response.data.mensaje);
+
         })
         .catch((error) => {
             console.log(error);
+            alert("ERROR es posible que no estes autorizado para realizar esta accion")
         });
 
 
@@ -68,7 +78,7 @@ function crearMoto() {
 function obtenerValores() {
 
     let placa = document.getElementById("placa").value
-    let estado = document.getElementById("estado").value
+    let estado = "MALO"
     let clase = document.getElementById("clase").value
     let marca = document.getElementById("marca").value
     let modelo = document.getElementById("modelo").value
@@ -93,7 +103,6 @@ function limpiarForm() {
 
 
     document.getElementById("placa").value = ""
-    document.getElementById("estado").value = ""
     document.getElementById("clase").value = ""
     document.getElementById("marca").value = ""
     document.getElementById("modelo").value = ""
@@ -106,7 +115,7 @@ function limpiarForm() {
     document.getElementById("vencimiento_tecnomecanica").value = ""
 
 
-    
+
     document.getElementById("btnCrearMoto").style.display = "inline"
     document.getElementById("btnEditarMoto").style.display = "none"
     document.getElementById("labelPlaca").style.display = "inline"
@@ -130,13 +139,16 @@ function limpiarForm() {
  */
 function eliminarMoto(placa) {
 
-    axios.delete(`http://localhost:3002/apiFinal/v1/motos/${placa}`)
+    let token = localStorage.getItem("token")
+
+    axios.delete(`http://localhost:3002/apiFinal/v1/motos/${placa}`,{headers:{"token":token}})
         .then((response) => {
             obtenerMotos()
             console.log(response);
         })
         .catch((error) => {
             console.log(error);
+            alert("ERROR es posible que no estes autorizado para realizar esta accion")
         });
 
 }
@@ -158,7 +170,6 @@ function cargarInformacion(placa) {
 
             motoTemp = moto.placa
             document.getElementById("placa").value = moto.placa
-            document.getElementById("estado").value = moto.estado
             document.getElementById("clase").value = moto.clase
             document.getElementById("marca").value = moto.marca
             document.getElementById("modelo").value = moto.modelo
@@ -194,9 +205,10 @@ function actualizarMoto() {
     let moto = obtenerValores();
 
     console.log(motoTemp)
+    let token = localStorage.getItem("token")
 
     axios
-        .put(`http://localhost:3002/apiFinal/v1/motos/${motoTemp}`, moto)
+        .put(`http://localhost:3002/apiFinal/v1/motos/${motoTemp}`, moto,{headers:{"token":token}})
         .then((response) => {
             obtenerMotos()
             limpiarForm()
@@ -204,6 +216,7 @@ function actualizarMoto() {
         })
         .catch((error) => {
             console.log(error);
+            alert("ERROR es posible que no estes autorizado para realizar esta accion")
         });
 
 }
