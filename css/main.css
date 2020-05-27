@@ -1,7 +1,42 @@
-#btnEditar {
+#btnEditarMoto {
+  display: none;
+}
+
+#btnEditarUsuario{
     display: none;
 }
 
-.mi_contenedor {
-    margin: 50px;
+#titulo2 {
+  display: none;
 }
+
+.mi_contenedor {
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-bottom: 100px;
+  margin-top: 30px;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  -webkit-box-shadow: -7px 7px 26px 0px rgba(150, 150, 150, 1);
+  -moz-box-shadow: -7px 7px 26px 0px rgba(150, 150, 150, 1);
+  box-shadow: -7px 7px 26px 0px rgba(150, 150, 150, 1);
+}
+
+.form-group.required :after {
+  content: "*";
+  color: red;
+}
+
+
+body {
+    background-image: url("../images/fondo.jpg");
+    background-repeat: repeat-y;
+    background-size: auto;
+}
+

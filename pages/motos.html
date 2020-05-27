@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Gestion Paginas</title>
+    <title>Taller de Motos</title>
 </head>
 
 <body>
@@ -24,79 +24,116 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="motos.html">Gestion de Motos<span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active" id="linkAdminExclusivo1">
+                    <a class="nav-link" href="usuarios.html">Gestion de Usuarios<span class="sr-only">(current)</span></a>
+                </li>
             </ul>
         </div>
     </nav>
 
 
-    <div class="mi_contenedor">
-        <h1>Gestión de Motos</h1>
-        <div class="card">
+    <div>
+        <center>
+            <h1>Gestión de Motos</h1>
+        </center>
+
+        <div class="mi_contenedor">
             <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">Formulario de Ingreso de Motos</h6>
+                <h6 class="card-subtitle mb-2 text-muted" id="titulo1">Formulario de Ingreso de Motos</h6>
+                <h6 class="card-subtitle mb-2 text-muted" id="titulo2">Formulario de Actualizacion de Motos</h6>
                 <form action="javascript:void(0)" onsubmit="crearMoto()">
-                    <div class="form-group">
-                        <label for="placa">Placa</label>
+                    <div class="form-group required">
+                        <label for="placa" id="labelPlaca">Placa</label>
                         <input class="form-control" type="text" placeholder="Ingrese la Placa de la moto" id="placa"
                             required>
                     </div>
-                    <div class="form-group">
-                        <label for="color">Estado</label>
-                        <input class="form-control" type="text" placeholder="Ingrese el color de la moto" id="estado"
+                    <div class="form-group required">
+                        <label for="estado">Estado</label>
+                        <input class="form-control" type="text" placeholder="Ingrese el estado de la moto" id="estado"
                             required>
                     </div>
-                    <div class="form-group">
-                        <label for="marca">clase</label>
-                        <input class="form-control" type="text" placeholder="Ingrese la clase de la moto"
-                            id="descripcion" required>
+                    <div class="form-group required">
+                        <label for="clase">Clase</label>
+                        <input class="form-control" type="text" placeholder="Ingrese la clase de la moto" id="clase"
+                            required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="marca">Marca</label>
+                        <input class="form-control" type="text" placeholder="Ingrese la marca de la moto" id="marca"
+                            required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="modelo">Modelo</label>
+                        <input class="form-control" type="number" placeholder="Ingrese el modelo de la moto" id="modelo"
+                            required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="color">Color</label>
+                        <input class="form-control" type="text" placeholder="Ingrese el color de la moto" id="color"
+                            required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="cilindraje">Cilindraje</label>
+                        <input class="form-control" type="number" max="9999" placeholder="Ingrese el color de la moto"
+                            id="cilindraje" required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="id_propietario">Documento propietario</label>
+                        <input class="form-control" type="number"
+                            placeholder="Ingrese el numero de documento del propietario de la moto" id="id_propietario"
+                            required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="nro_soat">Numero de SOAT</label>
+                        <input class="form-control" type="number" placeholder="Ingrese el numero de soat de la moto"
+                            id="nro_soat" required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="vencimiento_soat">Fecha vencimiento SOAT</label>
+                        <input class="form-control" type="date" id="vencimiento_soat" required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="nro_tecnomecanica">Numero tecnomecanica</label>
+                        <input class="form-control" type="number"
+                            placeholder="Ingrese el numero de tecnomecanica de la moto" id="nro_tecnomecanica" required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="vencimiento_tecnomecanica">Fecha vencimiento tecnomecanica</label>
+                        <input class="form-control " type="date" id="vencimiento_tecnomecanica" required>
                     </div>
 
 
-
-
-                    placa
-                    estado
-                    clase
-                    marca
-                    modelo
-                    color
-                    cilindraje
-                    id_propietario
-                    nroSoat
-                    fechavencimientoSOAT
-                    nroTecnomecanica
-                    fechavencimientoTecnicomecanica
-
-
-
-
-
-
-
-
-
-                    <input id="btnCrearPagina" class="btn btn-primary" type="submit" value="Registrar Pagina">
-                    <button type="button" onclick="actualizarPagina()" id="btnEditar" class="btn btn-primary">Actualizar
-                        Pagina</button>
+                    <input id="btnCrearMoto" class="btn btn-primary" type="submit" value="Ingresar Moto">
+                    <button type="button" onclick="actualizarMoto()" id="btnEditarMoto" class="btn btn-primary">Actualizar
+                        Moto</button>
                 </form>
             </div>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">url</th>
-                    <th scope="col">nombre</th>
-                    <th scope="col">descripción</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Eliminar</th>
+        <center>
+            <h2>Tabla de Motos</h2>
+        </center>
+        <div class="mi_contenedor">
 
-                </tr>
-            </thead>
-            <tbody id="listaPaginas">
+            <table class="table">
 
-            </tbody>
-        </table>
+                <div>
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Placa</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Propietario</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Eliminar</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="listaMotos">
+
+                    </tbody>
+            </table>
+        </div>
     </div>
 
 
@@ -112,7 +149,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/index.js"></script>
+    <script src="/js/motos.js"></script>
 
 </body>
 
