@@ -1,8 +1,36 @@
+
+
+
+
 //array de usuarios
 let usuarios = [];
 let usuarioTemp = null;
 
 
+
+
+function verificarRol(){
+
+
+
+    let rol = localStorage.getItem("rol")
+    console.log(rol)
+
+    if(rol== 1){
+        document.getElementById("linkAdminExclusivo1").style.display = "none"
+        document.getElementById("linkAdminExclusivo2").style.display = "none"
+        document.getElementById("linkmecanicoExclusivo").style.display = "inline"
+
+    }else{
+
+        document.getElementById("linkAdminExclusivo1").style.display = "inline"
+        document.getElementById("linkAdminExclusivo2").style.display = "inline"
+        document.getElementById("linkmecanicoExclusivo").style.display = "none"
+    
+
+    }
+ 
+}
 /**
 * metodo para traer todos los usuarios y enlistarlos
 */
@@ -215,3 +243,4 @@ function actualizarUsuario() {
 
 
 obtenerUsuarios();
+verificarRol();

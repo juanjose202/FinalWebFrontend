@@ -1,6 +1,34 @@
+
 //array de motos
 let motos = [];
 let motoTemp = null;
+
+
+
+
+function verificarRol(){
+
+
+
+    let rol = localStorage.getItem("rol")
+    console.log(rol)
+
+    if(rol== 1){
+        document.getElementById("linkAdminExclusivo1").style.display = "none"
+        document.getElementById("linkAdminExclusivo2").style.display = "none"
+        document.getElementById("linkmecanicoExclusivo").style.display = "inline"
+        
+
+    }else{
+
+        document.getElementById("linkAdminExclusivo1").style.display = "inline"
+        document.getElementById("linkAdminExclusivo2").style.display = "inline"
+        document.getElementById("linkmecanicoExclusivo").style.display = "none"
+
+    }
+ 
+}
+
 
 
 
@@ -113,9 +141,6 @@ function limpiarForm() {
     document.getElementById("vencimiento_soat").value = ""
     document.getElementById("nro_tecnomecanica").value = ""
     document.getElementById("vencimiento_tecnomecanica").value = ""
-
-
-
     document.getElementById("btnCrearMoto").style.display = "inline"
     document.getElementById("btnEditarMoto").style.display = "none"
     document.getElementById("labelPlaca").style.display = "inline"
@@ -177,9 +202,9 @@ function cargarInformacion(placa) {
             document.getElementById("cilindraje").value = moto.cilindraje
             document.getElementById("id_propietario").value = moto.id_propietario
             document.getElementById("nro_soat").value = moto.nro_soat
-            document.getElementById("vencimiento_soat").value = moto.vencimiento_soat
+            document.getElementById("vencimiento_soat").value = moto.vencimiento_soat.slice(0,10)
             document.getElementById("nro_tecnomecanica").value = moto.nro_tecnomecanica
-            document.getElementById("vencimiento_tecnomecanica").value = moto.vencimiento_tecnomecanica
+            document.getElementById("vencimiento_tecnomecanica").value = moto.vencimiento_tecnomecanica.slice(0,10)
 
 
             document.getElementById("labelPlaca").style.display = "none"
@@ -212,7 +237,7 @@ function actualizarMoto() {
         .then((response) => {
             obtenerMotos()
             limpiarForm()
-            console.log(response);
+            alert("La moto se actualizo correctamente");
         })
         .catch((error) => {
             console.log(error);
@@ -221,4 +246,5 @@ function actualizarMoto() {
 
 }
 
+verificarRol();
 obtenerMotos();

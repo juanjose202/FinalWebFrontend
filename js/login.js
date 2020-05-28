@@ -1,3 +1,4 @@
+
 function iniciarSesion() {
 
     let usuario = obtenerDatos()
@@ -11,9 +12,24 @@ function iniciarSesion() {
             }
             else {
 
+
+                
+                let documento = response.data.usuario.documento
                 let token = response.data.info;
+                let rol = response.data.usuario.rol
+                localStorage.setItem('documento', documento)
+                localStorage.setItem('rol', rol);
                 localStorage.setItem('token', token);
+
+
+                if (rol == 1) {
+                    alert("Bienvenido Mecanico")
+                } else {
+                    alert("Bienvenido Administrador")
+                }
+
                 location.href = "../pages/motos.html";
+
             }
 
 
