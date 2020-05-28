@@ -58,7 +58,7 @@
                             <th scope="col">placa</th>
                             <th scope="col">fecha asignacion</th>
                             <th scope="col">Trabajos</th>
-                            <th scope="col">actualizar</th>
+                            <th scope="col">Seleccionar</th>
                             
                         </tr>
                     </thead>
@@ -67,6 +67,48 @@
                     </tbody>
             </table>
         </div>
+
+
+        <center>
+            <h2>actualizacion de Mantenimiento</h2>
+        </center>
+        
+        <div class="mi_contenedor">
+
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted" id="titulo1">Datos Mantenimiento</h6>
+                <form action="javascript:void(0)" onsubmit="actualizarMantenimiento()">
+
+                    <div class="form-group ">
+                        <label for="documento">Documento Mecanico:</label>
+                        <label for="documento" id="labelDocumento"></label>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="placa">Placa:</label>
+                        <label for="placa" id="labelPlaca"></label>
+                    </div>
+                    <div class="form-group required">
+                        <label for="trabajos" >Trabajos realizados</label>
+                        <input class="form-control" type="text" placeholder="Ingrese la Placa de la moto" id="trabajos"
+                            required>
+                    </div>
+                    <div class="form-group required">
+                        <label for="trabajos" >Horas Invertidas</label>
+                        <input class="form-control" type="number" placeholder="Ingrese la Placa de la moto" id="horas"
+                            required>
+                    </div>
+                    <center>
+                        <input class="btn btn-primary" type="submit" value="Actualizar Mantenimiento">
+                    </center>
+                </form>
+            </div>
+
+
+            
+        
+        </div>
+
     </div>
 
 

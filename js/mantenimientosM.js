@@ -1,5 +1,8 @@
 let mantenimientos=[]
 
+let placaTemp=""
+let documentoTemp=""
+
 function verificarRol(){
 
 
@@ -76,8 +79,86 @@ function obtenerMantenimientos() {
 
 function cargarMantenimiento(placa,documento){
 
+    document.getElementById('labelDocumento').innerHTML = documento
+    document.getElementById('labelPlaca').innerHTML = placa
+    
+    documentoTemp=documento
+    placaTemp=placa
+
+    
+
+    limpiarCampos()
+
 }
 
+
+function actualizarMantenimiento(){
+
+
+
+    let date = new Date();
+    let dia = date.getDate();
+    let mes= date.getMonth()+1;
+    let anio = date.getFullYear();
+    let fecha= anio+"-"+mes+"-"+dia;
+
+    let trabajos_realizados = document.getElementById('trabajos').value
+    let horas_invertidas= document.getElementById('horas').value
+
+
+    let miMantenimiento={
+        id_mecanico:documentoTemp,
+        placa:placaTemp,
+        trabajos_realizados:trabajos_realizados,
+        fecha:fecha,
+        horas_invertidas:horas_invertidas
+
+    }
+
+
+    let token = localStorage.getItem("token")
+
+    axios
+        .put(`http://localhost:3002/apiFinal/v1/mantenimientos/${documentoTemp}/${placaTemp}`, miMantenimiento,{headers:{"token":token}})
+        .then((response) => {
+            obtenerMantenimientos()
+            actualizarEstadoMoto()
+            limpiarCampos()
+            alert("el mantenimiento fue realizado La moto se actualizo correctamente");
+        })
+        .catch((error) => {
+            console.log(error);
+            alert("ERROR es posible que no estes autorizado para realizar esta accion")
+        });
+
+}
+
+function limpiarCampos(){
+
+    document.getElementById('trabajos').value = ""
+    document.getElementById('horas').value = ""
+}
+
+
+function actualizarEstadoMoto() {
+
+
+    let token = localStorage.getItem("token")
+
+    axios
+        .put(`http://localhost:3002/apiFinal/v1/motosEstado/${placaTemp}/Reparada`, null, { headers: { "token": token } })
+        .then((response) => {
+
+            
+        })
+        .catch((error) => {
+            console.log(error);
+            alert("ERROR es posible que no estes autorizado para realizar esta accion")
+        });
+
+    limpiarCampos()
+
+}
 
 obtenerMantenimientos()
 verificarRol()
